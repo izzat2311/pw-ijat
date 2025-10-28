@@ -25,7 +25,7 @@
         <!-- Student Info -->
         <div class="mb-3">
           <label class="form-label">Student Name:</label>
-          <input type="text" class="form-control" id="studentName">
+          <input type="text" class="form-control" id="studentName" onblur="nameAlert()" onchange="toUppercase(this)">
         </div>
 
         <div class="mb-3">
@@ -35,7 +35,7 @@
 
         <div class="mb-3">
           <label class="form-label">Mother's Name:</label>
-          <input type="text" class="form-control" id="motherName">
+          <input type="text" class="form-control" id="motherName" onchange="toUppercase(this)">
         </div>
 
         <!-- Gender -->
@@ -54,7 +54,7 @@
         <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" class="form-control" id="email" placeholder="email@xyz.com">
+          <input type="email" class="form-control" id="email" placeholder="email@xyz.com" onfocus="highlightEmail(this)" onblur="removeHighlight(this)">
         </div>
 
         <!-- Level & Department -->
@@ -153,7 +153,27 @@
         image.src = URL.createObjectURL(event.target.files[0]);
       }
 
-      // Simulate form submission
+      // i) onblur — alert after user finish typing student name
+      function nameAlert() {
+        alert("You have finished typing your name!");
+      }
+
+      // ii) onfocus — highlight email field when clicked
+      function highlightEmail(input) {
+        input.style.backgroundColor = "#d6f5ff";
+      }
+
+      // remove highlight when user leaves email field
+      function removeHighlight(input) {
+        input.style.backgroundColor = "white";
+      }
+
+      // iii) onchange — change student & mother’s name to uppercase
+      function toUppercase(input) {
+        input.value = input.value.toUpperCase();
+      }
+
+      // iv) Register Button — show modal when submitted
       function submitForm() {
         const name = document.getElementById('studentName').value;
         if (name.trim() === "") {
